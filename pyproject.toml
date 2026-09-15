@@ -1,0 +1,22 @@
+[project]
+name = "blog-api-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "noman asim", email = "asimnoman30@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.141.1",
+    "psycopg2-binary>=2.9.13",
+    "python-dotenv>=1.2.3",
+    "sqlalchemy>=2.0.53",
+]
+
+[project.scripts]
+blog-api-project = "blog_api_project:main"
+
+[build-system]
+requires = ["uv_build>=0.12.14,<0.13.0"]
+build-backend = "uv_build"
