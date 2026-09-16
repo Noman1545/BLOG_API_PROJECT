@@ -9,8 +9,11 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.141.1",
+    "passlib[bcrypt]>=1.7.4",
     "psycopg2-binary>=2.9.13",
     "python-dotenv>=1.2.3",
+    "python-jose>=3.5.0",
+    "python-multipart>=0.0.32",
     "sqlalchemy>=2.0.53",
 ]
 
