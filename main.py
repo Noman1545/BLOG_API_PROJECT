@@ -1,7 +1,8 @@
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, status
 from sqlalchemy.orm import Session
-from auth import create_token, verify_token
+from auth import create_token, verify_credentials, verify_token
 from database import SessionLocal, engine
+from fastapi.security import OAuth2PasswordRequestForm
 import schemas
 import models
 
@@ -24,9 +25,15 @@ def home():
 
 
 @app.post("/login")
-def login():
+def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    if not verify_credentials(form_data.username, form_data.password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password",
+        )
+
     return {
-        "access token": create_token({"user": "admin"}),
+        "access_token": create_token({"sub": form_data.username}),
         "token_type": "bearer",
     }
 

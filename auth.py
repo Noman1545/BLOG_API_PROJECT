@@ -9,9 +9,15 @@ from jose import JWTError, jwt
 load_dotenv()
 
 SECRET_KEY = os.getenv("SECRETKEY")
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 ALGORITHM = "HS256"
 EXPIRY_MINUTES = 30
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="login")
+
+
+def verify_credentials(username: str, password: str) -> bool:
+    return username == ADMIN_USERNAME and password == ADMIN_PASSWORD
 
 
 def create_token(data: dict):
